@@ -283,6 +283,8 @@ print(f'SNR Computed = {SNR_actual} dB')
 
 #for N=12 and period = 30
 
+
+
 import matplotlib.pyplot as plt
 import numpy as np  
 from scipy import signal
@@ -477,3 +479,92 @@ print("Obtained Noise power", noise_pwr)
 
 actualSNR = 10 * np.log10(sig_pwr / noise_pwr)
 print('SNR Computed =', actualSNR, 'dB')
+
+
+
+#Q2.D
+#When N = 6
+
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import signal
+b_count = 6
+Frequency = 200e6
+pd = 1 / Frequency
+t = np.linspace(0, 10 * pd, 1000)
+org_sig = np.cos(2 * np.pi * Frequency * t)
+plt.figure()
+plt.plot(t, org_sig, color='green', label="Cosine Waveform")
+plt.ylabel("Original signal Amplitude")
+plt.title('The Original signal Plot')
+plt.legend(loc='upper right')
+plt.show()
+samp_freq = 400e6
+samp_pd = 1 / samp_freq
+ts = np.arange(0, (100 * pd), samp_pd)
+samp_sig = np.cos(2 * np.pi * Frequency * ts)
+plt.figure()
+plt.stem(ts, samp_sig, basefmt=" ", linefmt='green', markerfmt='go', label="Sampled Waveform")
+plt.ylabel("Sampled signal Amplitude")
+plt.title('The Sampled signal Plot')
+plt.legend(loc='upper right')
+plt.show()
+def hann_wind(signal):
+    N = len(signal)
+    window = 0.5 - 0.5 * np.cos(2 * np.pi * (np.arange(N) / (N - 1)))
+    return signal * window
+quant_sig = hann_wind(samp_sig)
+plt.figure()
+plt.stem(ts, quant_sig, basefmt=" ", linefmt='green', markerfmt='go', label="Hanning Window Sampled Signal")
+plt.ylabel("Sampled signal Amplitude")
+plt.title('Sampled signal of Hanning window')
+plt.legend(loc='upper right')
+plt.show()
+def quant(signal, b_count):
+    q_levels = 2 ** b_count
+    q_step = 1 / q_levels
+    q_sig = np.round(signal / q_step) * q_step
+    return q_sig
+Hann_win_q_sig = quant(quant_sig, b_count)
+plt.figure()
+plt.stem(ts, Hann_win_q_sig, basefmt=" ", linefmt='green', markerfmt='go', label="Hanning Window Quantized Signal")
+plt.ylabel("Quantized Signal Amplitude")
+plt.title('Quantized Signal of Hanning Window')
+plt.legend(loc='upper right')
+plt.show()
+q_levels = 2 ** b_count
+noise_sig = Hann_win_q_sig - np.round(Hann_win_q_sig * (q_levels - 1) / 2) / (q_levels - 1) * 2
+n = len(ts)
+fft_q = np.fft.fft(Hann_win_q_sig, n)
+psd_q = fft_q * np.conj(fft_q) / n
+freq_signal = (samp_freq / n) * np.arange(n)
+plt.figure()
+plt.plot(freq_signal, np.abs(psd_q), color='green', label="PSD of Quantized Signal")
+plt.xlabel("frequency in Hz")
+plt.ylabel("PSD")
+plt.title("PSD of Quantized Signal")
+plt.legend(loc='upper right')
+plt.show()
+f, den = signal.periodogram(Hann_win_q_sig, samp_freq)
+f_maxx = f[np.argmax(den)]
+sig_pwr = 0
+noise_pwr = 0
+for i in range(len(f)):
+    if f[i] == f_maxx:
+        sig_pwr += den[i]
+f, den = signal.periodogram(noise_sig, samp_freq)
+f_maxx = f[np.argmax(den)]
+for i in range(len(f)):
+    if f[i] == f_maxx:
+        noise_pwr += den[i]
+print("Obtained Signal power", sig_pwr)
+print("Obtained Noise power", noise_pwr)
+SNR_Actual = 10 * np.log10(np.abs(sig_pwr) / np.abs(noise_pwr))
+print('SNR Computed =', str(np.abs(SNR_Actual)), 'dB')
+
+
+
+#When N = 12
+
