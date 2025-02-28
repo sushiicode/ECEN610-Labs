@@ -101,6 +101,10 @@ print(f"SNR Which is computed from PSD of noise sampled signal: {actual_snr:.2f}
 plt.show()
 
 
+
+
+
+
 #Q1.B
 
 import matplotlib.pyplot as plt
