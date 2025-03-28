@@ -7,7 +7,7 @@ from scipy.signal import freqz
 
 N = 8
 C_History= 15.425e-12
-Cr = 0.5e-9
+Cr = 0.5e-12
 freq = 2.4e9
 factor=1/2*freq*Cr
 a=C_History/C_History+Cr
