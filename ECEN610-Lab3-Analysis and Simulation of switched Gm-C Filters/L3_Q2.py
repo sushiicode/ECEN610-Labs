@@ -1,4 +1,4 @@
-#Q2a
+#Q2b
 #Effect of adding CH capacitor
 
 import matplotlib.pyplot as plt
