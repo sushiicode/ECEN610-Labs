@@ -67,25 +67,24 @@ cr2 = 2 * Cr
 cr3 = 3 * Cr
 cr4 = 4 * Cr
 
-a1 = (C_History / (C_History + cr1))
-a2 = (C_History / (C_History + cr2))
-a3 = (C_History / (C_History + cr3))
-a4 = (C_History / (C_History + cr4))
+m1 = (C_History / (C_History + cr1))
+m2 = (C_History / (C_History + cr2))
+m3 = (C_History / (C_History + cr3))
+m4 = (C_History / (C_History + cr4))
 
 x = (DT) / Cs
 fir1 = x * np.array([1, 1, 1, 1, 1, 1, 1, 1])
 fir2 = np.array([0, 0, 0, 0, 0, 0, 0, 0, (1 - a)])
-fir3 = np.array([a1, 0, 0, 0, 0, 0, 0, 0, (a1 * a2), 0, 0, 0, 0, 0, 0, 0, (a1 * a2 * a3), 0, 0, 0, 0, 0, 0, 0, (a1 * a2 * a3 * a4)])
+fir3 = np.array([m1, 0, 0, 0, 0, 0, 0, 0, (m1 * m2), 0, 0, 0, 0, 0, 0, 0, (m1 * m2 * m3), 0, 0, 0, 0, 0, 0, 0, (m1 * m2 * m3 * m4)])
 iir1 = np.array([1, 0, 0, 0, 0, 0, 0, 0, -a])
 iir2 = np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1])
-
-a1, TF_1 = signal.freqz(fir1, 1, worN=80001, whole=False)
-a2, TF_2 = signal.freqz(fir2, 1, worN=80001, whole=False)
-a3, TF_3 = signal.freqz(fir3, 1, worN=80001, whole=False)
-a4, TF_4 = signal.freqz(1, iir1, worN=80001, whole=False)
-a5, TF_5 = signal.freqz(1, iir2, worN=80001, whole=False)
+m1, TF_1 = signal.freqz(fir1, 1, worN=80001, whole=False)
+m2, TF_2 = signal.freqz(fir2, 1, worN=80001, whole=False)
+m3, TF_3 = signal.freqz(fir3, 1, worN=80001, whole=False)
+m4, TF_4 = signal.freqz(1, iir1, worN=80001, whole=False)
+m5, TF_5 = signal.freqz(1, iir2, worN=80001, whole=False)
 plt.figure()
-plt.plot(((f_c * a1) / (2 * np.pi)), 10 * np.log10(np.abs(TF_1)) + 10 * np.log10(np.abs(TF_2)) + 10 * np.log10(np.abs(TF_3)) + 10 * np.log10(np.abs(TF_4)) + 10 * np.log10(np.abs(TF_5)), color='green')
+plt.plot(((f_c * m1) / (2 * np.pi)), 10 * np.log10(np.abs(TF_1)) + 10 * np.log10(np.abs(TF_2)) + 10 * np.log10(np.abs(TF_3)) + 10 * np.log10(np.abs(TF_4)) + 10 * np.log10(np.abs(TF_5)), color='green')
 plt.grid()
 plt.xlabel("Angular Freq")
 plt.ylabel("Transfer Func")
