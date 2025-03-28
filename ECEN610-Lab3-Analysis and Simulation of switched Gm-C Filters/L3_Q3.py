@@ -22,7 +22,25 @@ plt.title('Magnitude Response - 4 capacitors are discharged')
 plt.show()
 
 #Q3b
-
+# four capacitors are never discharged
+import matplotlib.pyplot as plt
+from scipy.signal import freqz
+import numpy as np
+N=32
+Freq = 2.4e9
+C_history =15.295e-12
+Cr = 0.5e-9
+a= C_history /C_history + Cr
+fact =1/2* Freq * Cr
+num = fact *np.array([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+denominator=fact *np.array([1,0,0,0,0,0,0,0,-a])
+freq,tf=freqz(num,denominator)
+plt.plot(freq,20*np.log10(abs(tf)), color = 'green')
+plt.grid()
+plt.xlabel('Frequency in [rad/sec]')
+plt.ylabel('Amplitude')
+plt.title('Magnitude Response - Capacitors are Never Discharged')
+plt.show()
 
 
 #Q3c
