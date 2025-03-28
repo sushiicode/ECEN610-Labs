@@ -20,3 +20,9 @@ plt.xlabel('Frequency in [rad/sec]')
 plt.ylabel('Amplitude')
 plt.title('Magnitude Response - 4 capacitors are discharged')
 plt.show()
+
+#Q3b
+
+
+
+#Q3c
