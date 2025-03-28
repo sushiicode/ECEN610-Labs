@@ -22,6 +22,7 @@ plt.title('Magnitude Response - 4 capacitors are discharged')
 plt.show()
 
 #Q3b
+
 # four capacitors are never discharged
 import matplotlib.pyplot as plt
 from scipy.signal import freqz
