@@ -5,7 +5,7 @@ import numpy as np
 from scipy.signal import freqz
 
 N = 8
-Cs = 15.295e-12
+Cs = 15.925e-12
 freq = 2.4e9
 fact = 1 / 2 * freq * Cs
 num = fact * np.array([1, 1, 1, 1, 1, 1, 1, 1])
@@ -19,9 +19,6 @@ plt.ylabel('Amplitude')
 plt.title('Magnitude Response- Capacitor is Discharged')
 plt.show()
 
-Q1. b
-
-#1.B
 
 #Q1b
 # Capacitors doesnt get discharged
@@ -31,7 +28,7 @@ import numpy as np
 from scipy.signal import freqz
 
 N = 8
-Cs = 15.295e-12
+Cs = 15.925e-12
 freq = 2.4e9
 fact = 1 / 2 * freq * Cs
 num = fact * np.array([1, 1, 1, 1, 1, 1, 1, 1])
@@ -44,4 +41,3 @@ plt.xlabel('Frequency in [rad/sec]')
 plt.ylabel('Amplitude')
 plt.title('Response when Capacitors are Not Discharged')
 plt.show()
-
