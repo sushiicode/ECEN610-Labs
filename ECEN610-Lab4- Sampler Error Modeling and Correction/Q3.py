@@ -86,3 +86,59 @@ print(ratio)
 
 plt.tight_layout()
 plt.show()
+
+#3b
+
+# Q3b
+import numpy as np
+import matplotlib.pyplot as plt
+
+fig, (ax1, ax2) = plt.subplots(2)
+plt.subplots_adjust(left=None, bottom=None, right=2, top=2, wspace=None, hspace=None)
+
+ref_adc_step_size = 1 / (2**12)
+actual_step_size = 1 / (2**7)
+
+freq1 = 0.2e9
+freq2 = 0.58e9
+freq3 = 1e9
+freq4 = 1.7e9
+freq5 = 2.4e9
+
+inputtime = 1 / freq1
+t = np.linspace(0, inputtime, 100000)
+
+s1 = 0.1 * (np.sin(2 * np.pi * freq1 * t))
+s2 = 0.1 * (np.sin(2 * np.pi * freq2 * t))
+s3 = 0.1 * (np.sin(2 * np.pi * freq3 * t))
+s4 = 0.1 * (np.sin(2 * np.pi * freq4 * t))
+s5 = 0.1 * (np.sin(2 * np.pi * freq5 * t))
+
+signal = s1 + s2 + s3 + s4 + s5
+
+fs = 10e9
+ts = 1 / fs
+tsample = np.arange(ts / 2, inputtime, ts)
+
+ss1 = 0.1 * (np.sin(2 * np.pi * freq1 * tsample))
+ss2 = 0.1 * (np.sin(2 * np.pi * freq2 * tsample))
+ss3 = 0.1 * (np.sin(2 * np.pi * freq3 * tsample))
+ss4 = 0.1 * (np.sin(2 * np.pi * freq4 * tsample))
+ss5 = 0.1 * (np.sin(2 * np.pi * freq5 * tsample))
+
+signalsample = ss1 + ss2 + ss3 + ss4 + ss5
+ax1.stem(tsample, signalsample, linefmt='green', markerfmt='go')  # Set the color to green
+ax1.set_xlabel('Time in S')
+ax1.set_ylabel('Amplitude')
+ax1.set_title('Sampled Signal Plot')
+
+quantization_signal = np.round(signalsample / ref_adc_step_size)
+quantized_signal = (quantization_signal * ref_adc_step_size)
+
+ax2.stem(tsample, quantized_signal, linefmt='green', markerfmt='go')  # Set the color to green
+ax2.set_xlabel('Time in S')
+ax2.set_ylabel('Amplitude')
+ax2.set_title('Quantized Signal Plot')
+
+plt.tight_layout()
+plt.show()
