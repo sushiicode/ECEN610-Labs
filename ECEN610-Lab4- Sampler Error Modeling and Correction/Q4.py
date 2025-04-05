@@ -3,8 +3,8 @@ import numpy as np
 
 freq1 = 1e9
 input = 1 / freq1
-time = np.linspace(0, input, 100000)  # Time array for one period of the signal
-sig = np.sin(2 * np.pi * freq1 * time)  # Message signal
+time = np.linspace(0, input, 100000)  
+sig = np.sin(2 * np.pi * freq1 * time)  
 
 fig, (m1, m2, m3, m4, m5) = plt.subplots(5, 1, figsize=(10, 12))
 
@@ -45,7 +45,7 @@ for k in range(0, 100000):
     if count % 2 == 0:
         practicalsample[k] = (sig[k]) * gain_mis
 
-m3.stem(time, practicalsample, linefmt='g-', markerfmt='go')  # 'g-' for green line, 'go' for green markers
+m3.stem(time, practicalsample, linefmt='g-', markerfmt='go')  
 m3.set_title('Sample Signal with Gain Mismatch, Offset Error, Time Mismatch Plot')
 m3.set_xlabel('Time in S')
 m3.set_ylabel('Amplitude')
@@ -54,7 +54,7 @@ resultsignal = [0 for d in range(100000)]
 for k in range(0, 100000):
     resultsignal[k] = idealsample[k] + practicalsample[k]
 
-m4.stem(time, resultsignal, linefmt='g-', markerfmt='go')  # 'g-' for green line, 'go' for green markers
+m4.stem(time, resultsignal, linefmt='g-', markerfmt='go')  
 m4.set_title('Result Signal Plot')
 m4.set_xlabel('Time in S')
 m4.set_ylabel('Amplitude')
@@ -68,7 +68,7 @@ PSD = (np.abs(noise_fft) * np.abs(np.conj(noise_fft))) / n
 Freq = (1 / (samp_time * n)) * np.arange(n)
 L = np.arange(1, np.floor((n / 2)), dtype=int)
 
-m5.stem(Freq[L], PSD[L], linefmt='g-', markerfmt='go')  # 'g-' for green line, 'go' for green markers
+m5.stem(Freq[L], PSD[L], linefmt='g-', markerfmt='go')  
 m5.set_title('PSD [Result Signal]')
 m5.set_xlabel('Frequency in Hz')
 m5.set_ylabel('Power Spectral Density [PSD]')
