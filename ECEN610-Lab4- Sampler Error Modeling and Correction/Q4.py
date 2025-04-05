@@ -23,7 +23,7 @@ for k in range(0, 100000):
     if int(k % constant2) == 0:
         idealsample[k] = sig[k]
 
-m2.stem(time, idealsample, linefmt='g-', markerfmt='go')  # 'g-' for green line, 'go' for green markers
+m2.stem(time, idealsample, linefmt='g-', markerfmt='go')  
 m2.set_title('Sample Signal [No Mismatch]')
 m2.set_xlabel('Time in S')
 m2.set_ylabel('Amplitude')
