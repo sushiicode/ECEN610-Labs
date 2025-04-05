@@ -127,7 +127,7 @@ ss4 = 0.1 * (np.sin(2 * np.pi * freq4 * tsample))
 ss5 = 0.1 * (np.sin(2 * np.pi * freq5 * tsample))
 
 signalsample = ss1 + ss2 + ss3 + ss4 + ss5
-ax1.stem(tsample, signalsample, linefmt='green', markerfmt='go')  # Set the color to green
+ax1.stem(tsample, signalsample, linefmt='green', markerfmt='go') 
 ax1.set_xlabel('Time in S')
 ax1.set_ylabel('Amplitude')
 ax1.set_title('Sampled Signal Plot')
@@ -135,7 +135,7 @@ ax1.set_title('Sampled Signal Plot')
 quantization_signal = np.round(signalsample / ref_adc_step_size)
 quantized_signal = (quantization_signal * ref_adc_step_size)
 
-ax2.stem(tsample, quantized_signal, linefmt='green', markerfmt='go')  # Set the color to green
+ax2.stem(tsample, quantized_signal, linefmt='green', markerfmt='go')  
 ax2.set_xlabel('Time in S')
 ax2.set_ylabel('Amplitude')
 ax2.set_title('Quantized Signal Plot')
