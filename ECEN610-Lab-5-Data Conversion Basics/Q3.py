@@ -39,3 +39,29 @@ plt.grid(True)
 plt.legend()
 plt.xticks(code)
 plt.show()
+
+Q3.C
+
+import matplotlib.pyplot as plt
+import numpy as np
+code = np.arange(8)  
+dnl = [None, 0.05921, -0.17105, -0.21711, -0.17105, 0.01316, 0.10526, 0.38158]  
+inl = [0, 0.05921, -0.11184, -0.32895, -0.5, -0.48684, -0.38158, 0]  
+fig, (m1, m2) = plt.subplots(1, 2, figsize=(14, 5))
+m1.bar(code[1:], dnl[1:], color='orange', edgecolor='black')
+m1.set_xlabel('Code')
+m1.set_ylabel('DNL (LSB)')
+m1.set_title('Differential Nonlinearity (DNL) vs. Code (Part c)')
+m1.grid(True, axis='y')
+m1.set_xticks(code[1:])
+m1.set_ylim(-0.4, 0.5)
+m2.plot(code, inl, 'g-o', label='INL')
+m2.set_xlabel('Code')
+m2.set_ylabel('INL (LSB)')
+m2.set_title('Integral Nonlinearity (INL) vs. Code (Part c)')
+m2.grid(True)
+m2.legend()
+m2.set_xticks(code)
+m2.set_ylim(-0.6, 0.2)
+plt.tight_layout()
+plt.show()
