@@ -66,7 +66,7 @@ m2.set_ylim(-0.6, 0.2)
 plt.tight_layout()
 plt.show()
 
-Q3.D
+#Q3.D
 
 # Q3d
 import numpy as np
