@@ -6,7 +6,7 @@ bit_resolution = 13
 stage_count = 6
 signal_frequency = 200e6
 error_factors = {
-    'gain_reduction': 1.1,
+    'gain_reduction': 1.01,
     'offset_error': 0.05,
     'cap_mismatch': 0.02,
     'comp_offset': 0.001,
@@ -51,19 +51,18 @@ quantization_noise = processed_signal - ideal_signal
 
 snr_result = calc_snr(ideal_signal, quantization_noise)
 print(f"SNR with errors: {snr_result} dB")
-
 def to_db(signal):
     return 20 * np.log10(np.maximum(np.abs(signal), 1e-12))
 plt.figure(figsize=(10, 6))
 plt.subplot(2, 1, 1)
 plt.plot(time_array[:1000], to_db(input_data[:1000]), label='Input Tone (200 MHz)')
 plt.title('Input Tone (200 MHz) in dB')
-plt.xlabel('Time in s')
-plt.ylabel('Amplitude in dB')
+plt.xlabel('Time [s]')
+plt.ylabel('Amplitude [dB]')
 plt.subplot(2, 1, 2)
 plt.plot(time_array[:1000], to_db(processed_signal[:1000]), label='Processed Signal with Errors', color='r')
 plt.title('Processed Signal with Static Errors in dB')
-plt.xlabel('Time in s')
-plt.ylabel('Amplitude in dB')
+plt.xlabel('Time [s]')
+plt.ylabel('Amplitude [dB]')
 plt.tight_layout()
 plt.show()
